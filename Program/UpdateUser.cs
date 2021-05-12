@@ -112,6 +112,8 @@ namespace Library
                             cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Update is successfull!!!");
+                            fillData();
+                            selectItem(UserID + "-" + txtBoxName.Text + " " + txtBoxLastName.Text);
                         }
                         catch (SqlException ex)
                         {
