@@ -14,9 +14,23 @@ namespace Library
 {
     public partial class UpdateTopics : Form
     {
+        private DataTable data = new DataTable();
+        private int topicID;
         public UpdateTopics()
         {
             InitializeComponent();
+        }
+
+        private DataTable Data
+        {
+            get { return this.data; }
+            set { this.data = value; }
+        }
+
+        private int TopicID
+        {
+            get { return this.topicID; }
+            set { this.topicID = value; }
         }
 
         private void Topics_Click(object sender, EventArgs e)
@@ -45,14 +59,18 @@ namespace Library
             using (SqlConnection con = new SqlConnection(_ConnectionString))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT SUBTOP_NAME FROM SUBJECT_TOPICS"))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM SUBJECT_TOPICS"))
                 {
                     cmd.Connection = con;
                     using (SqlDataReader sdr = cmd.ExecuteReader())
                     {
+                        if(cmbBoxTopics.Items.Count > 0)
+                        {
+                            cmbBoxTopics.Items.Clear();
+                        }
                         while (sdr.Read())
                         {
-                            cmbBoxTopics.Items.Add(sdr["SUBTOP_NAME"].ToString());
+                            cmbBoxTopics.Items.Add(sdr["SUBTOP_ID"].ToString() + "-" + sdr["SUBTOP_NAME"].ToString());
                         }
                     }
                 }
@@ -104,7 +122,7 @@ namespace Library
                         cmd.Connection = con;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@SUBTOP_NAME", SqlDbType.NVarChar).Value = txtBoxUpdate.Text;
-
+                        cmd.Parameters.Add("@SUBTOP_ID", SqlDbType.Int).Value = TopicID;
                         try
                         {
                             cmd.ExecuteNonQuery();
