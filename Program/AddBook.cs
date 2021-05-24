@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
 
-namespace Library
+namespace LibraryProject
 {
     public partial class AddBook : UserControl
     {
@@ -52,6 +52,10 @@ namespace Library
                     {
                         using (SqlDataReader sdrTopics = cmdTopics.ExecuteReader())
                         {
+                            if(listBoxTopics.Items.Count > 0)
+                            {
+                                listBoxTopics.Items.Clear();
+                            }
                             while (sdrTopics.Read())
                             {
                                 listBoxTopics.Items.Add(sdrTopics["SUBTOP_NAME"]);

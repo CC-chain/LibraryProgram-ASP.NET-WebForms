@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Library
+namespace LibraryProject
 {
     public partial class MyBooks : UserControl
     {
@@ -31,21 +31,15 @@ namespace Library
                 var id = dataGridView1.CurrentRow.Cells["BOOK_ID"].Value.ToString();
                 DetailedMyBooks detailed = new DetailedMyBooks();
                 LibraryProgram user = (LibraryProgram)this.Parent;
-                if (!String.IsNullOrEmpty(id) && user.Staff_Id != -1) { 
-                detailed.fillDetailedData(id , user.Staff_Id);
+                if (!String.IsNullOrEmpty(id)) { 
+                detailed.fillDetailedData(id);
                 detailed.ShowDialog();
                 } 
             }
-            else if (dataGridView1.CurrentCell.ColumnIndex == 1)
+
+            if(dataGridView1.CurrentCell.ColumnIndex == 0)
             {
-                var id = dataGridView1.CurrentRow.Cells["BOOK_ID"].Value.ToString();
-                UpdateMyBooks detailed = new UpdateMyBooks();
-                LibraryProgram user = (LibraryProgram)this.Parent;
-                if (!String.IsNullOrEmpty(id) && user.Staff_Id != -1)
-                {
-                    detailed.fillDetailedData(id, user.Staff_Id);
-                    detailed.ShowDialog();
-                }
+
             }
         }
 
@@ -57,13 +51,13 @@ namespace Library
                 con.Open();
                 LibraryProgram user = (LibraryProgram)this.Parent;
               
-                if(!String.IsNullOrEmpty(user.Role) && user.Staff_Id != -1)
+                if(user.User_Id != -1)
                 {
-                    using (SqlCommand cmd = new SqlCommand("GET_STAFF_MYBOOKS"))
+                    using (SqlCommand cmd = new SqlCommand("GET_MYBOOKS"))
                     {
                         cmd.Connection = con;
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@STAFF_ID", SqlDbType.Int).Value = user.Staff_Id;
+                        cmd.Parameters.Add("@USER_ID", SqlDbType.Int).Value = user.User_Id;
 
                         try
                         {
@@ -90,12 +84,10 @@ namespace Library
         {
             dataGridView1.Columns["BOOK_ID"].DisplayIndex = 0;
             dataGridView1.Columns["BOOK_TITLE"].DisplayIndex = 1;
-            dataGridView1.Columns["BOOK_PAGE"].DisplayIndex = 2;
-            dataGridView1.Columns["BOOK_YEAR"].DisplayIndex = 3;
-            dataGridView1.Columns["LANGUAGE_NAME"].DisplayIndex = 4;
-            dataGridView1.Columns["PUBLISHER_NAME"].DisplayIndex = 5;
-            dataGridView1.Columns["btnUpdate"].DisplayIndex = 6;
-            dataGridView1.Columns["btnMore"].DisplayIndex = 7;
+            dataGridView1.Columns["BOOK_ISBN"].DisplayIndex = 2;
+            dataGridView1.Columns["BOOK_EXPIRED_DATE"].DisplayIndex = 3;
+            dataGridView1.Columns["btnMore"].DisplayIndex = 4;
+            dataGridView1.Columns["btnReturn"].DisplayIndex = 5;
         }
         private void myBooksDataSetBindingSource_CurrentChanged(object sender, EventArgs e)
         {
@@ -110,6 +102,22 @@ namespace Library
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             refreshData();
+        }
+
+        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            int row = dataGridView1.RowCount;
+            while (row > 0)
+            {
+                if (Convert.ToDateTime(dataGridView1.Rows[row-1].Cells["BOOK_EXPIRED_DATE"].Value) < DateTime.Now)
+                {
+                    dataGridView1.Rows[row - 1].Cells["BOOK_EXPIRED_DATE"].ErrorText = "You delayed expired date to return book, You will be fined!!";
+                }
+                else
+                {
+                    dataGridView1.Rows[row - 1].Cells["BOOK_EXPIRED_DATE"].ErrorText = "";
+                }
+            }
         }
     }
 }

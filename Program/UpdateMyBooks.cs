@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Library
+namespace LibraryProject
 {
     public partial class UpdateMyBooks : Form
     {
@@ -41,9 +41,10 @@ namespace Library
             set { this.staffID = value; }
         }
 
-        public void fillDetailedData(string bookID, int staffID)
+        public void fillDetailedData(string book, int staffID)
         {
             string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string bookID = new string(book.TakeWhile(char.IsDigit).ToArray());
             BookID = Convert.ToInt32(bookID);
             StaffID = staffID;
             using (SqlConnection con = new SqlConnection(_ConnectionString))
@@ -152,7 +153,7 @@ namespace Library
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "ADD_TOPICS";
+                    cmd.CommandText = "ADD_SELECTED_TOPICS";
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@BOOK_ID", SqlDbType.Int);
                     cmd.Parameters.Add("@SUBTOP_ID", SqlDbType.Int);
@@ -368,7 +369,7 @@ namespace Library
                     using (SqlCommand cmd = new SqlCommand("CHECK_BOOK", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add("@BOOK_ISBN", SqlDbType.NVarChar).Value = txtBoxISBN.Text;
+                        cmd.Parameters.Add("@BOOK_ID", SqlDbType.Int).Value = BookID;
 
                         isExists = Convert.ToBoolean(cmd.ExecuteScalar());
                     }
@@ -403,6 +404,13 @@ namespace Library
 
                 }
             }
+        }
+
+        private void UpdateMyBooks_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LibraryProgram program = (LibraryProgram)Application.OpenForms["LibraryProgram"];
+            program.Admin.fillData();
+            program.MyBook.refreshData();
         }
     }
 

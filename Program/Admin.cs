@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Library
+namespace LibraryProject
 {
     public partial class Admin : UserControl
     {
@@ -216,7 +216,7 @@ namespace Library
                         }
                         else
                         {
-                            MessageBox.Show("Book is not exists");
+                            MessageBox.Show("It exists in topic table!!");
                         }
                     }
                 }   
@@ -347,7 +347,7 @@ namespace Library
             {
                 UpdateTopics updateTopics = new UpdateTopics();
                 updateTopics.fillData();
-                updateTopics.selectItem(cmbBoxPublisher.SelectedItem.ToString());
+                updateTopics.selectItem(cmbBoxTopics.SelectedItem.ToString());
                 updateTopics.ShowDialog();
             }
         }
@@ -364,7 +364,7 @@ namespace Library
                         cmd.Connection = con;
                         cmd.CommandType = CommandType.StoredProcedure;
                         string topicID = new string(cmbBoxTopics.SelectedItem.ToString().TakeWhile(char.IsDigit).ToArray());
-                        cmd.Parameters.Add("@TOPIC_ID", SqlDbType.Int).Value = topicID;
+                        cmd.Parameters.Add("@SUBTOP_ID", SqlDbType.Int).Value = topicID;
 
                         if (Convert.ToBoolean(cmd.ExecuteScalar()) == true)
                         {

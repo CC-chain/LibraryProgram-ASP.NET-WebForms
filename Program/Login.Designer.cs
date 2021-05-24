@@ -1,5 +1,5 @@
 ﻿
-namespace Library
+namespace LibraryProject
 {
     partial class Login
     {
@@ -38,6 +38,7 @@ namespace Library
             this.label3 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblValidation = new System.Windows.Forms.Label();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblLogin
@@ -116,7 +117,6 @@ namespace Library
             this.btnLogin.TabIndex = 7;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // lblValidation
             // 
@@ -130,10 +130,21 @@ namespace Library
             this.lblValidation.Text = "User or Password is incorrect!!";
             this.lblValidation.Visible = false;
             // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(644, 48);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(126, 23);
+            this.btnRegister.TabIndex = 9;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.lblValidation);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label3);
@@ -162,5 +173,6 @@ namespace Library
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblValidation;
+        private System.Windows.Forms.Button btnRegister;
     }
 }

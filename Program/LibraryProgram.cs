@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using LibraryProgram;
 
-namespace Library
+namespace LibraryProject
 {
     public partial class LibraryProgram : Form
     {
-
+        private string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private int _logined;
         private string role;
         private int staff_id;
@@ -67,13 +68,14 @@ namespace Library
             myProfile.Hide();
             Publisher.Hide();
             Admin.Hide();
+            borrowBook.Hide();
             addBook.Hide();
-          
+            add.Hide();
+            btnAdmin.Enabled = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             if (!String.IsNullOrEmpty(txtBoxUser.Text) && !String.IsNullOrEmpty(txtBoxPassword.Text))
             {
                 Console.WriteLine(_ConnectionString);
@@ -115,12 +117,33 @@ namespace Library
                                 txtBoxUser.Text = "";
                                 txtBoxPassword.Text = "";
                                 panel.Hide();
+                                if(lblRole.Text != "Admin")
+                                {
+                                    btnAdmin.Enabled = false;
+                                }
+                                else
+                                {
+                                    btnAdmin.Enabled = true;
+                                }
                             }
+                            con.Close();
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
                         }
+                    }
+                    if(User_Id > 0) { 
+                    using(SqlCommand cmdCheck = new SqlCommand())
+                    {
+                        con.Open();
+                        cmdCheck.CommandText = "ADD_LOGGINED_USERS";
+                        cmdCheck.CommandType = CommandType.StoredProcedure;
+                        cmdCheck.Connection = con;
+                        cmdCheck.Parameters.Add("@USER_ID", SqlDbType.Int).Value = User_Id;
+
+                        cmdCheck.ExecuteNonQuery();
+                    }
                     }
                 }
             }
@@ -132,8 +155,7 @@ namespace Library
 
         private void getMemberInfo(string User , string Password)
         {
-            string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+            
             using(SqlConnection con = new SqlConnection(_ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand("GET_LOGINNED_MEMBER_INFO ", con);
@@ -148,6 +170,7 @@ namespace Library
                         lblID.Text = ordr["USER_ID"].ToString();
                         lblAccount.Text = ordr["USER_NAME"].ToString() +" "+ordr["USER_LASTNAME"].ToString();
                         lblRole.Text = "Member";
+                        User_Id = Convert.ToInt32(ordr["USER_ID"].ToString());
                     }
                 }
             }
@@ -155,7 +178,6 @@ namespace Library
 
         private void getStaffInfo(string User, string Password)
         {
-            string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(_ConnectionString))
             {
@@ -177,6 +199,7 @@ namespace Library
                     }
                 }
             }
+            
         }
 
         private void linklblLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -184,6 +207,21 @@ namespace Library
             if (_logined == 1 || _logined == 2)
             {
                 logout();
+                if (User_Id > 0)
+                {
+                   using(SqlConnection con = new SqlConnection(_ConnectionString)) { 
+                        using (SqlCommand cmdCheck = new SqlCommand())
+                        {
+                        cmdCheck.CommandText = "DROP_LOGGINNED_USERS";
+                        cmdCheck.CommandType = CommandType.StoredProcedure;
+                        cmdCheck.Connection = con;
+                        cmdCheck.Parameters.Add("@USER_ID", SqlDbType.Int).Value = User_Id;
+
+                        con.Open();
+                        cmdCheck.ExecuteNonQuery();
+                        }
+                   }
+                }
             }
         }
 
@@ -192,11 +230,13 @@ namespace Library
             lblID.Text = "";
             lblAccount.Text = "";
             lblRole.Text = "";
+            borrowBook.Hide();
             Publisher.Hide();
             myProfile.Hide();
             addBook.Hide();
             myBooks.Hide();
             Admin.Hide();
+            add.Hide();
             panel.Show();
         }
 
@@ -236,34 +276,15 @@ namespace Library
             myBooks.Hide();
             addBook.Hide();
             myProfile.Hide();
+            add.Hide();
+            borrowBook.Hide();
 
             Admin.fillData();
             Admin.Show();
             Admin.BringToFront();
         }
 
-        private void buttonAddBook_Click(object sender, EventArgs e)
-        {
-            myBooks.Hide();
-            myProfile.Hide();
-            Publisher.Hide();
-            Admin.Hide();
-
-            addBook.getData();
-            addBook.Show();
-            addBook.BringToFront();
-        }
-
-        private void buttonAddPublisher_Click(object sender, EventArgs e)
-        {
-            myBooks.Hide();
-            myProfile.Hide();
-            addBook.Hide();
-            Admin.Hide();
-
-            Publisher.Show();
-            Publisher.BringToFront();
-        }
+    
 
         private void buttonMyBooks_Click(object sender, EventArgs e)
         {
@@ -271,6 +292,8 @@ namespace Library
             myProfile.Hide();
             addBook.Hide();
             Admin.Hide();
+            add.Hide();
+            borrowBook.Hide();
 
             myBooks.refreshData();
             myBooks.Show();
@@ -282,10 +305,80 @@ namespace Library
             Publisher.Hide();
             myBooks.Hide();
             addBook.Hide();
+            Admin.Hide();
+            add.Hide();
+            borrowBook.Hide();
 
-            
             myProfile.Show();
             myProfile.BringToFront();
+        }
+
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            Register register = new Register();
+
+            register.Show();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            myBooks.Hide();
+            myProfile.Hide();
+            Publisher.Hide();
+            Admin.Hide();
+            add.Hide();
+            borrowBook.Hide();
+
+            addBook.getData();
+            addBook.Show();
+            addBook.BringToFront();
+        }
+
+        private void btnAddPublisher_Click(object sender, EventArgs e)
+        {
+            myBooks.Hide();
+            myProfile.Hide();
+            addBook.Hide();
+            Admin.Hide();
+            add.Hide();
+            borrowBook.Hide();
+
+            Publisher.Show();
+            Publisher.BringToFront();
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            Register register = new Register();
+
+            register.Show();
+        }
+
+        private void btnMenuAdd_Click(object sender, EventArgs e)
+        {
+            myBooks.Hide();
+            myProfile.Hide();
+            addBook.Hide();
+            Admin.Hide();
+            borrowBook.Hide();
+
+
+            add.Show();
+            add.BringToFront();
+        }
+
+        private void btnMenuBorrow_Click(object sender, EventArgs e)
+        {
+            myBooks.Hide();
+            myProfile.Hide();
+            addBook.Hide();
+            Admin.Hide();
+            add.Hide();
+
+            borrowBook.refreshData();
+            borrowBook.Show();
+            borrowBook.BringToFront();
         }
     }
 }

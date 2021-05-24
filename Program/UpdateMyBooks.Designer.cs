@@ -1,5 +1,5 @@
 ﻿
-namespace Library
+namespace LibraryProject
 {
     partial class UpdateMyBooks
     {
@@ -433,6 +433,7 @@ namespace Library
             this.Controls.Add(this.label1);
             this.Name = "UpdateMyBooks";
             this.Text = "UpdateMyBooks";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UpdateMyBooks_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pctrBoxBook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderISBN)).EndInit();
