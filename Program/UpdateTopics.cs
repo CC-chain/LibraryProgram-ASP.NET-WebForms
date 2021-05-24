@@ -10,10 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Library
+namespace LibraryProject
 {
     public partial class UpdateTopics : Form
     {
+        private string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private DataTable data = new DataTable();
         private int topicID;
         public UpdateTopics()
@@ -49,19 +50,29 @@ namespace Library
         {
             if (cmbBoxTopics.SelectedIndex > -1)
             {
-                txtBoxUpdate.Text = cmbBoxTopics.SelectedItem.ToString();
+
+                txtBoxUpdate.Text = Data.Rows[cmbBoxTopics.SelectedIndex]["SUBTOP_NAME"].ToString();
+                TopicID = Convert.ToInt32(Data.Rows[cmbBoxTopics.SelectedIndex]["SUBTOP_ID"]);
             }
         }
 
         public void fillData()
         {
-            string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+           
             using (SqlConnection con = new SqlConnection(_ConnectionString))
             {
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand("SELECT * FROM SUBJECT_TOPICS"))
                 {
                     cmd.Connection = con;
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        if (Data.Rows.Count > 0)
+                        {
+                            Data.Clear();
+                        }
+                        sda.Fill(Data);
+                    }
                     using (SqlDataReader sdr = cmd.ExecuteReader())
                     {
                         if(cmbBoxTopics.Items.Count > 0)
@@ -81,7 +92,7 @@ namespace Library
         {
             if (!String.IsNullOrEmpty(txtBoxAdd.Text))
             {
-                using (SqlConnection con = new SqlConnection())
+                using (SqlConnection con = new SqlConnection(_ConnectionString))
                 {
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand("ADD_TOPIC"))
@@ -114,7 +125,7 @@ namespace Library
             if (!String.IsNullOrEmpty(txtBoxUpdate.Text))
             {
 
-                using (SqlConnection con = new SqlConnection())
+                using (SqlConnection con = new SqlConnection(_ConnectionString))
                 {
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand("UPDATE_TOPIC"))

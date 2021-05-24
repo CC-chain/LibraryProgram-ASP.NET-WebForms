@@ -1,5 +1,5 @@
 ﻿
-namespace Library
+namespace LibraryProject
 {
     partial class MyBooks
     {
@@ -34,12 +34,10 @@ namespace Library
             this.btnRefresh = new System.Windows.Forms.Button();
             this.BOOK_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BOOK_TITLE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LANGUAGE_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BOOK_PAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BOOK_YEAR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PUBLISHER_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BOOK_ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BOOK_EXPIRED_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnMore = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnUpdate = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnReturn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,24 +53,24 @@ namespace Library
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BOOK_ID,
             this.BOOK_TITLE,
-            this.LANGUAGE_NAME,
-            this.BOOK_PAGE,
-            this.BOOK_YEAR,
-            this.PUBLISHER_NAME,
+            this.BOOK_ISBN,
+            this.BOOK_EXPIRED_DATE,
             this.btnMore,
-            this.btnUpdate});
+            this.btnReturn});
             this.dataGridView1.Location = new System.Drawing.Point(36, 58);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(549, 300);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             // 
             // btnRefresh
             // 
@@ -86,66 +84,58 @@ namespace Library
             // 
             // BOOK_ID
             // 
-            this.BOOK_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BOOK_ID.DataPropertyName = "BOOK_ID";
+            this.BOOK_ID.FillWeight = 30F;
             this.BOOK_ID.HeaderText = "ID";
             this.BOOK_ID.MinimumWidth = 15;
             this.BOOK_ID.Name = "BOOK_ID";
+            this.BOOK_ID.Width = 43;
             // 
             // BOOK_TITLE
             // 
             this.BOOK_TITLE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BOOK_TITLE.DataPropertyName = "BOOK_TITLE";
+            this.BOOK_TITLE.FillWeight = 30F;
             this.BOOK_TITLE.HeaderText = "Title";
             this.BOOK_TITLE.Name = "BOOK_TITLE";
             // 
-            // LANGUAGE_NAME
+            // BOOK_ISBN
             // 
-            this.LANGUAGE_NAME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LANGUAGE_NAME.DataPropertyName = "LANGUAGE_NAME";
-            this.LANGUAGE_NAME.HeaderText = "Language";
-            this.LANGUAGE_NAME.Name = "LANGUAGE_NAME";
+            this.BOOK_ISBN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BOOK_ISBN.DataPropertyName = "BOOK_ISBN";
+            this.BOOK_ISBN.HeaderText = "ISBN";
+            this.BOOK_ISBN.Name = "BOOK_ISBN";
             // 
-            // BOOK_PAGE
+            // BOOK_EXPIRED_DATE
             // 
-            this.BOOK_PAGE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BOOK_PAGE.DataPropertyName = "BOOK_PAGE";
-            this.BOOK_PAGE.HeaderText = "Page";
-            this.BOOK_PAGE.Name = "BOOK_PAGE";
-            // 
-            // BOOK_YEAR
-            // 
-            this.BOOK_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BOOK_YEAR.DataPropertyName = "BOOK_YEAR";
-            this.BOOK_YEAR.HeaderText = "Year";
-            this.BOOK_YEAR.Name = "BOOK_YEAR";
-            // 
-            // PUBLISHER_NAME
-            // 
-            this.PUBLISHER_NAME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PUBLISHER_NAME.DataPropertyName = "PUBLISHER_NAME";
-            this.PUBLISHER_NAME.HeaderText = "Publisher";
-            this.PUBLISHER_NAME.Name = "PUBLISHER_NAME";
+            this.BOOK_EXPIRED_DATE.DataPropertyName = "BOOK_EXPIRED_DATE";
+            this.BOOK_EXPIRED_DATE.FillWeight = 80F;
+            this.BOOK_EXPIRED_DATE.HeaderText = "Expired Date";
+            this.BOOK_EXPIRED_DATE.Name = "BOOK_EXPIRED_DATE";
+            this.BOOK_EXPIRED_DATE.Width = 93;
             // 
             // btnMore
             // 
-            this.btnMore.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.btnMore.FillWeight = 80F;
             this.btnMore.HeaderText = "";
-            this.btnMore.MinimumWidth = 75;
+            this.btnMore.MinimumWidth = 60;
             this.btnMore.Name = "btnMore";
             this.btnMore.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.btnMore.Text = "More..";
             this.btnMore.UseColumnTextForButtonValue = true;
+            this.btnMore.Width = 60;
             // 
-            // btnUpdate
+            // btnReturn
             // 
-            this.btnUpdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.btnUpdate.HeaderText = "";
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.btnUpdate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseColumnTextForButtonValue = true;
+            this.btnReturn.FillWeight = 80F;
+            this.btnReturn.HeaderText = "";
+            this.btnReturn.MinimumWidth = 60;
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnReturn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.btnReturn.Text = "Return..";
+            this.btnReturn.UseColumnTextForButtonValue = true;
+            this.btnReturn.Width = 60;
             // 
             // MyBooks
             // 
@@ -170,11 +160,9 @@ namespace Library
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridViewTextBoxColumn BOOK_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn BOOK_TITLE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LANGUAGE_NAME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BOOK_PAGE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BOOK_YEAR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PUBLISHER_NAME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BOOK_ISBN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BOOK_EXPIRED_DATE;
         private System.Windows.Forms.DataGridViewButtonColumn btnMore;
-        private System.Windows.Forms.DataGridViewButtonColumn btnUpdate;
+        private System.Windows.Forms.DataGridViewButtonColumn btnReturn;
     }
 }

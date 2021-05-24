@@ -1,5 +1,5 @@
 ﻿
-namespace Library
+namespace LibraryProject
 {
     partial class UpdatePublisher
     {

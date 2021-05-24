@@ -1,5 +1,5 @@
 ﻿
-namespace Library
+namespace LibraryProject
 {
     partial class UpdateUser
     {
@@ -72,6 +72,9 @@ namespace Library
             // comboBoxGender
             // 
             this.comboBoxGender.FormattingEnabled = true;
+            this.comboBoxGender.Items.AddRange(new object[] {
+            "MALE",
+            "FEMALE"});
             this.comboBoxGender.Location = new System.Drawing.Point(133, 209);
             this.comboBoxGender.Name = "comboBoxGender";
             this.comboBoxGender.Size = new System.Drawing.Size(96, 21);

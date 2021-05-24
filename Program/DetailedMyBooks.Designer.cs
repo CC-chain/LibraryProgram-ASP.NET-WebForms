@@ -1,5 +1,5 @@
 ﻿
-namespace Library
+namespace LibraryProject
 {
     partial class DetailedMyBooks
     {
@@ -45,6 +45,8 @@ namespace Library
             this.lblID = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtBoxAbstract = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxBook = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBook)).BeginInit();
             this.SuspendLayout();
             // 
             // label6
@@ -79,7 +81,7 @@ namespace Library
             // lblLanguage
             // 
             this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(18, 268);
+            this.lblLanguage.Location = new System.Drawing.Point(143, 315);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(35, 13);
             this.lblLanguage.TabIndex = 23;
@@ -89,7 +91,7 @@ namespace Library
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.Location = new System.Drawing.Point(16, 247);
+            this.label10.Location = new System.Drawing.Point(141, 294);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 18);
             this.label10.TabIndex = 22;
@@ -98,7 +100,7 @@ namespace Library
             // lblPage
             // 
             this.lblPage.AutoSize = true;
-            this.lblPage.Location = new System.Drawing.Point(18, 221);
+            this.lblPage.Location = new System.Drawing.Point(18, 263);
             this.lblPage.Name = "lblPage";
             this.lblPage.Size = new System.Drawing.Size(35, 13);
             this.lblPage.TabIndex = 21;
@@ -108,7 +110,7 @@ namespace Library
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(16, 200);
+            this.label4.Location = new System.Drawing.Point(16, 242);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 18);
             this.label4.TabIndex = 20;
@@ -117,7 +119,7 @@ namespace Library
             // lblYear
             // 
             this.lblYear.AutoSize = true;
-            this.lblYear.Location = new System.Drawing.Point(20, 173);
+            this.lblYear.Location = new System.Drawing.Point(145, 260);
             this.lblYear.Name = "lblYear";
             this.lblYear.Size = new System.Drawing.Size(35, 13);
             this.lblYear.TabIndex = 19;
@@ -127,7 +129,7 @@ namespace Library
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(16, 155);
+            this.label3.Location = new System.Drawing.Point(141, 242);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 18);
             this.label3.TabIndex = 18;
@@ -136,7 +138,7 @@ namespace Library
             // lblISBN
             // 
             this.lblISBN.AutoSize = true;
-            this.lblISBN.Location = new System.Drawing.Point(18, 129);
+            this.lblISBN.Location = new System.Drawing.Point(143, 210);
             this.lblISBN.Name = "lblISBN";
             this.lblISBN.Size = new System.Drawing.Size(35, 13);
             this.lblISBN.TabIndex = 17;
@@ -146,7 +148,7 @@ namespace Library
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(16, 108);
+            this.label2.Location = new System.Drawing.Point(141, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 18);
             this.label2.TabIndex = 16;
@@ -155,7 +157,7 @@ namespace Library
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(18, 85);
+            this.lblTitle.Location = new System.Drawing.Point(18, 210);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(35, 13);
             this.lblTitle.TabIndex = 15;
@@ -165,7 +167,7 @@ namespace Library
             // 
             this.lbl1.AutoSize = true;
             this.lbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lbl1.Location = new System.Drawing.Point(16, 64);
+            this.lbl1.Location = new System.Drawing.Point(16, 189);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(40, 18);
             this.lbl1.TabIndex = 14;
@@ -174,7 +176,7 @@ namespace Library
             // lblID
             // 
             this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(18, 41);
+            this.lblID.Location = new System.Drawing.Point(94, 159);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(35, 13);
             this.lblID.TabIndex = 29;
@@ -184,7 +186,7 @@ namespace Library
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.Location = new System.Drawing.Point(16, 20);
+            this.label5.Location = new System.Drawing.Point(98, 138);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(24, 18);
             this.label5.TabIndex = 28;
@@ -200,11 +202,21 @@ namespace Library
             this.txtBoxAbstract.TabIndex = 30;
             this.txtBoxAbstract.Text = "";
             // 
+            // pictureBoxBook
+            // 
+            this.pictureBoxBook.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pictureBoxBook.Location = new System.Drawing.Point(66, 9);
+            this.pictureBoxBook.Name = "pictureBoxBook";
+            this.pictureBoxBook.Size = new System.Drawing.Size(100, 123);
+            this.pictureBoxBook.TabIndex = 32;
+            this.pictureBoxBook.TabStop = false;
+            // 
             // DetailedMyBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(246, 438);
+            this.Controls.Add(this.pictureBoxBook);
             this.Controls.Add(this.txtBoxAbstract);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.label5);
@@ -224,6 +236,7 @@ namespace Library
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DetailedMyBooks";
             this.Text = "DetailedMyBooks";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBook)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,5 +259,6 @@ namespace Library
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox txtBoxAbstract;
+        private System.Windows.Forms.PictureBox pictureBoxBook;
     }
 }

@@ -1,0 +1,5 @@
+D:\Library\LibraryProgram\obj\Debug\LibraryProgram.csprojAssemblyReference.cache
+D:\Library\LibraryProgram\obj\Debug\LibraryProgram.AddBook.resources
+D:\Library\LibraryProgram\obj\Debug\LibraryProgram.Properties.Resources.resources
+D:\Library\LibraryProgram\obj\Debug\LibraryProgram.csproj.GenerateResource.cache
+D:\Library\LibraryProgram\obj\Debug\LibraryProgram.csproj.CoreCompileInputs.cache
