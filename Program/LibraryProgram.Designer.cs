@@ -44,6 +44,8 @@ namespace LibraryProject
             this.lblAccount = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.btnAdmin = new System.Windows.Forms.Button();
+            this.btnMenuBorrow = new System.Windows.Forms.Button();
             this.lblValidation = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,27 +54,25 @@ namespace LibraryProject
             this.txtBoxUser = new System.Windows.Forms.TextBox();
             this.txtBoxPassword = new System.Windows.Forms.TextBox();
             this.lblLogin = new System.Windows.Forms.Label();
-            this.btnAdmin = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.Label();
             this.lblRole = new System.Windows.Forms.Label();
             this.add = new System.Windows.Forms.Panel();
             this.btnAddUser = new System.Windows.Forms.Button();
             this.btnAddPublisher = new System.Windows.Forms.Button();
             this.btnBookAdd = new System.Windows.Forms.Button();
-            this.btnMenuBorrow = new System.Windows.Forms.Button();
             this.borrowBook = new LibraryProject.BorrowBook();
             this.Publisher = new LibraryProject.AddPublisher();
             this.addBook = new LibraryProject.AddBook();
             this.myProfile = new LibraryProject.MyProfile();
-            this.myBooks = new LibraryProject.MyBooks();
             this.admin = new LibraryProject.Admin();
+            this.myBooks = new LibraryProject.MyBooks();
             this.panel.SuspendLayout();
             this.add.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnMenuMyProfile
             // 
-            this.btnMenuMyProfile.Location = new System.Drawing.Point(16, 290);
+            this.btnMenuMyProfile.Location = new System.Drawing.Point(15, 289);
             this.btnMenuMyProfile.Name = "btnMenuMyProfile";
             this.btnMenuMyProfile.Size = new System.Drawing.Size(116, 51);
             this.btnMenuMyProfile.TabIndex = 8;
@@ -127,7 +127,7 @@ namespace LibraryProject
             // 
             // btnMenuMyBooks
             // 
-            this.btnMenuMyBooks.Location = new System.Drawing.Point(16, 233);
+            this.btnMenuMyBooks.Location = new System.Drawing.Point(15, 232);
             this.btnMenuMyBooks.Name = "btnMenuMyBooks";
             this.btnMenuMyBooks.Size = new System.Drawing.Size(116, 51);
             this.btnMenuMyBooks.TabIndex = 7;
@@ -137,7 +137,7 @@ namespace LibraryProject
             // 
             // btnMenuAdd
             // 
-            this.btnMenuAdd.Location = new System.Drawing.Point(16, 119);
+            this.btnMenuAdd.Location = new System.Drawing.Point(15, 118);
             this.btnMenuAdd.Name = "btnMenuAdd";
             this.btnMenuAdd.Size = new System.Drawing.Size(116, 51);
             this.btnMenuAdd.TabIndex = 5;
@@ -164,8 +164,8 @@ namespace LibraryProject
             // panel
             // 
             this.panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel.Controls.Add(this.btnRegister);
             this.panel.Controls.Add(this.lblValidation);
+            this.panel.Controls.Add(this.btnRegister);
             this.panel.Controls.Add(this.btnLogin);
             this.panel.Controls.Add(this.label4);
             this.panel.Controls.Add(this.User);
@@ -187,6 +187,26 @@ namespace LibraryProject
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.Location = new System.Drawing.Point(15, 346);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(116, 51);
+            this.btnAdmin.TabIndex = 36;
+            this.btnAdmin.Text = "Admin";
+            this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
+            // 
+            // btnMenuBorrow
+            // 
+            this.btnMenuBorrow.Location = new System.Drawing.Point(15, 175);
+            this.btnMenuBorrow.Name = "btnMenuBorrow";
+            this.btnMenuBorrow.Size = new System.Drawing.Size(116, 51);
+            this.btnMenuBorrow.TabIndex = 38;
+            this.btnMenuBorrow.Text = "Borrow";
+            this.btnMenuBorrow.UseVisualStyleBackColor = true;
+            this.btnMenuBorrow.Click += new System.EventHandler(this.btnMenuBorrow_Click);
             // 
             // lblValidation
             // 
@@ -271,16 +291,6 @@ namespace LibraryProject
             this.lblLogin.TabIndex = 9;
             this.lblLogin.Text = "Login ";
             // 
-            // btnAdmin
-            // 
-            this.btnAdmin.Location = new System.Drawing.Point(15, 350);
-            this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(116, 51);
-            this.btnAdmin.TabIndex = 36;
-            this.btnAdmin.Text = "Admin";
-            this.btnAdmin.UseVisualStyleBackColor = true;
-            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
-            // 
             // lbl
             // 
             this.lbl.AutoSize = true;
@@ -339,20 +349,10 @@ namespace LibraryProject
             this.btnBookAdd.UseVisualStyleBackColor = true;
             this.btnBookAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnMenuBorrow
-            // 
-            this.btnMenuBorrow.Location = new System.Drawing.Point(15, 175);
-            this.btnMenuBorrow.Name = "btnMenuBorrow";
-            this.btnMenuBorrow.Size = new System.Drawing.Size(116, 51);
-            this.btnMenuBorrow.TabIndex = 38;
-            this.btnMenuBorrow.Text = "Borrow";
-            this.btnMenuBorrow.UseVisualStyleBackColor = true;
-            this.btnMenuBorrow.Click += new System.EventHandler(this.btnMenuBorrow_Click);
-            // 
             // borrowBook
             // 
-            this.borrowBook.DateMax = new System.DateTime(((long)(0)));
-            this.borrowBook.DateMin = new System.DateTime(((long)(0)));
+            this.borrowBook.DateMax = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.borrowBook.DateMin = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.borrowBook.Location = new System.Drawing.Point(154, 7);
             this.borrowBook.Name = "borrowBook";
             this.borrowBook.Size = new System.Drawing.Size(655, 490);
@@ -380,19 +380,19 @@ namespace LibraryProject
             this.myProfile.Size = new System.Drawing.Size(640, 433);
             this.myProfile.TabIndex = 17;
             // 
-            // myBooks
-            // 
-            this.myBooks.Location = new System.Drawing.Point(154, 13);
-            this.myBooks.Name = "myBooks";
-            this.myBooks.Size = new System.Drawing.Size(638, 446);
-            this.myBooks.TabIndex = 17;
-            // 
             // admin
             // 
             this.admin.Location = new System.Drawing.Point(159, 16);
             this.admin.Name = "admin";
             this.admin.Size = new System.Drawing.Size(632, 430);
             this.admin.TabIndex = 37;
+            // 
+            // myBooks
+            // 
+            this.myBooks.Location = new System.Drawing.Point(155, 24);
+            this.myBooks.Name = "myBooks";
+            this.myBooks.Size = new System.Drawing.Size(636, 440);
+            this.myBooks.TabIndex = 3;
             // 
             // LibraryProgram
             // 
@@ -401,22 +401,22 @@ namespace LibraryProject
             this.ClientSize = new System.Drawing.Size(800, 489);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.lblAccount);
-            this.Controls.Add(this.btnMenuBorrow);
-            this.Controls.Add(this.btnAdmin);
-            this.Controls.Add(this.btnMenuAdd);
             this.Controls.Add(this.lblID);
-            this.Controls.Add(this.btnMenuMyProfile);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblLine);
             this.Controls.Add(this.btnMenuMyBooks);
+            this.Controls.Add(this.btnMenuMyProfile);
+            this.Controls.Add(this.btnMenuAdd);
+            this.Controls.Add(this.btnAdmin);
+            this.Controls.Add(this.btnMenuBorrow);
             this.Controls.Add(this.add);
             this.Controls.Add(this.Publisher);
             this.Controls.Add(this.borrowBook);
             this.Controls.Add(this.addBook);
-            this.Controls.Add(this.myProfile);
             this.Controls.Add(this.myBooks);
+            this.Controls.Add(this.myProfile);
             this.Controls.Add(this.linklblLogout);
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.lblRole);
@@ -456,7 +456,6 @@ namespace LibraryProject
         private System.Windows.Forms.TextBox txtBoxUser;
         private System.Windows.Forms.Label lblLogin;
         private MyProfile myProfile;
-        private MyBooks myBooks;
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.Button btnAdmin;
@@ -469,6 +468,7 @@ namespace LibraryProject
         private System.Windows.Forms.Button btnAddPublisher;
         private System.Windows.Forms.Button btnMenuBorrow;
         private BorrowBook borrowBook;
+        private MyBooks myBooks;
     }
 }
 

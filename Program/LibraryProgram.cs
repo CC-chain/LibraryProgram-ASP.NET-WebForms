@@ -15,7 +15,10 @@ namespace LibraryProject
 {
     public partial class LibraryProgram : Form
     {
-        private string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        //private string _ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString; 
+        //(object reference not set to an instance of an object in some class) is occured. Check this problem!!
+        private string _ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=LibrarySystem;Integrated Security=True";
         private int _logined;
         private string role;
         private int staff_id;
@@ -47,7 +50,10 @@ namespace LibraryProject
         }
 
 
-
+        public BorrowBook BorrowBook
+        {
+            get { return this.borrowBook; }
+        }
         public MyBooks MyBook
         {
             get { return this.myBooks; }
@@ -173,8 +179,15 @@ namespace LibraryProject
                         User_Id = Convert.ToInt32(ordr["USER_ID"].ToString());
                     }
                 }
+                btnMenuAdd.Hide();
+                btnMenuAdd.Enabled = false;
+                btnAdmin.Hide();
+                btnAdmin.Enabled = false;
+                moveButtonsforMember();
+
             }
         }
+
 
         private void getStaffInfo(string User, string Password)
         {
@@ -198,8 +211,31 @@ namespace LibraryProject
                         User_Id = Convert.ToInt32(ordr["USER_ID"].ToString());
                     }
                 }
+
+                btnMenuAdd.Show();
+                btnMenuAdd.Enabled = true;
+                btnAdmin.Show();
+                btnAdmin.Enabled = true;
+                moveButtonsforStaff();
+
             }
             
+        }
+
+        private void moveButtonsforStaff()
+        {
+            btnMenuAdd.Location = new Point(15, 118);
+            btnMenuBorrow.Location = new Point(15, 175);
+            btnMenuMyBooks.Location = new Point(15, 232);
+            btnMenuMyProfile.Location = new Point(15, 289);
+            btnAdmin.Location = new Point(15, 346);
+        }
+
+        private void moveButtonsforMember()
+        {
+            btnMenuBorrow.Location = new Point(15, 120);
+            btnMenuMyBooks.Location = new Point(15, 177);
+            btnMenuMyProfile.Location = new Point(15, 234);
         }
 
         private void linklblLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -212,7 +248,7 @@ namespace LibraryProject
                    using(SqlConnection con = new SqlConnection(_ConnectionString)) { 
                         using (SqlCommand cmdCheck = new SqlCommand())
                         {
-                        cmdCheck.CommandText = "DROP_LOGGINNED_USERS";
+                        cmdCheck.CommandText = "DROP_LOGGINED_USERS";
                         cmdCheck.CommandType = CommandType.StoredProcedure;
                         cmdCheck.Connection = con;
                         cmdCheck.Parameters.Add("@USER_ID", SqlDbType.Int).Value = User_Id;

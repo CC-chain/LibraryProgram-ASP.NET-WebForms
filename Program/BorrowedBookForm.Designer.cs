@@ -1,5 +1,5 @@
 ﻿
-namespace LibraryProgram
+namespace LibraryProject
 {
     partial class BorrowedBookForm
     {
