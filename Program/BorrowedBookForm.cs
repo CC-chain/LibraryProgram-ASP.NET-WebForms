@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LibraryProgram
+namespace LibraryProject
 {
     public partial class BorrowedBookForm : Form
     {
@@ -121,14 +121,25 @@ namespace LibraryProgram
                         cmd.Parameters.Add("@USER_ID", SqlDbType.Int).Value = UserID;
                         cmd.Parameters.Add("@BOOK_EXPIRED_DATE", SqlDbType.Date).Value = date.ToString("yyyy-MM-dd");
 
-                        if (Convert.ToBoolean(cmd.ExecuteScalar()))
+                        var result = cmd.ExecuteScalar();
+
+                        if (Convert.ToInt32(result) == 0)
+                        {
+                            MessageBox.Show("You can't borrow more than 3 book!!");
+                            this.Close();
+                        }
+                        if(Convert.ToInt32(result) == 1)
                         {
                             MessageBox.Show("Succesfully borrowed!!");
-                            fillDetailedData(BookID, UserID);
+                            this.Close();
+                            LibraryProgram admin = (LibraryProgram)Application.OpenForms["LibraryProgram"];
+                            admin.BorrowBook.refreshData();
+
                         }
-                        else
+                        if (Convert.ToInt32(result) == 2)
                         {
                             MessageBox.Show("There is some problem occured!!");
+                            this.Close();
                         }
                     }
                 }

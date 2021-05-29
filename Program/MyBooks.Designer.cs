@@ -31,13 +31,13 @@ namespace LibraryProject
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.BOOK_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BOOK_TITLE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BOOK_ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BOOK_EXPIRED_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnMore = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnReturn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,17 +70,7 @@ namespace LibraryProject
             this.dataGridView1.Size = new System.Drawing.Size(549, 300);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(510, 364);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating_1);
             // 
             // BOOK_ID
             // 
@@ -137,6 +127,16 @@ namespace LibraryProject
             this.btnReturn.UseColumnTextForButtonValue = true;
             this.btnReturn.Width = 60;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(510, 364);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // MyBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,7 +146,6 @@ namespace LibraryProject
             this.Controls.Add(this.label1);
             this.Name = "MyBooks";
             this.Size = new System.Drawing.Size(620, 408);
-            this.Load += new System.EventHandler(this.MyBooks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

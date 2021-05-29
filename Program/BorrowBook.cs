@@ -16,11 +16,18 @@ namespace LibraryProject
     public partial class BorrowBook : UserControl
     {
         private string _ConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=LibrarySystem;Integrated Security=True";
+        private int memberId = -1;
         private DateTime dateMin = new DateTime();
         private DateTime dateMax = new DateTime();
         public BorrowBook()
         {
             InitializeComponent();
+        }
+
+        private int MemberID
+        {
+            get { return this.memberId; }
+            set { this.memberId = value; }
         }
 
         public DateTime DateMin
@@ -108,13 +115,13 @@ namespace LibraryProject
                     {
                         Filter filter = new Filter(txtBoxTitle.Text, cmbBoxLanguage.SelectedItem, cmbBoxPublisher.Text, DateMin, DateMax, txtBoxPageMin.Text, txtBoxPageMax.Text, txtBoxISBN.Text,
                             txtBoxAuthor.Text);
-                        query = filter.filterQuery(cmd);
+                        query = filter.filterQuery(cmd,MemberID);
                     }
                     else
                     {
                         Filter filter = new Filter(txtBoxTitle.Text, cmbBoxLanguage.SelectedItem, cmbBoxPublisher.SelectedItem, DateTime.Parse("1753-01-01"), DateTime.Parse("9998-12-01"), txtBoxPageMin.Text, txtBoxPageMax.Text, txtBoxISBN.Text,
                             txtBoxAuthor.Text);
-                        query = filter.filterQuery(cmd);
+                        query = filter.filterQuery(cmd, MemberID);
                     }
 
                     cmd.Connection = con;
@@ -183,14 +190,49 @@ namespace LibraryProject
             {
                 con.Open();
                 LibraryProgram user = (LibraryProgram)this.Parent;
-
-                if (user.User_Id != -1)
+                MemberID = user.User_Id;
+                if (MemberID != -1)
                 {
                     using (SqlCommand cmd = new SqlCommand("GET_BOOKS_FOR_BORROWED"))
                     {
                         cmd.Connection = con;
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@USER_ID", SqlDbType.Int).Value = MemberID;
+                        try
+                        {
 
+                            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            sda.Fill(dt);
+                            this.dataGridView1.DataSource = dt;
+                            orderColumns();
+
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception is occured: " + ex.Message);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        public void refreshData(int memberID)
+        {
+            using (SqlConnection con = new SqlConnection(_ConnectionString))
+            {
+                con.Open();
+
+                if (memberID != -1)
+                {
+                    MemberID = memberID;
+                    using (SqlCommand cmd = new SqlCommand("GET_BOOKS_FOR_BORROWED"))
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@USER_ID", SqlDbType.Int).Value = memberID;
                         try
                         {
 
@@ -218,7 +260,6 @@ namespace LibraryProject
             {
                 var bookId = dataGridView1.CurrentRow.Cells["BOOK_ID"].Value.ToString();
                 DetailedMyBooks detailed = new DetailedMyBooks();
-                LibraryProgram user = (LibraryProgram)this.Parent;
                 if (!String.IsNullOrEmpty(bookId))
                 {
                     detailed.fillDetailedData(bookId);
@@ -228,11 +269,10 @@ namespace LibraryProject
             if(dataGridView1.CurrentCell.ColumnIndex == 1)
             {
                 var bookId = dataGridView1.CurrentRow.Cells["BOOK_ID"].Value.ToString();
-                LibraryProgram parent = (LibraryProgram)this.Parent;
-                if(!String.IsNullOrEmpty(bookId) && parent.User_Id != -1)
+                if(!String.IsNullOrEmpty(bookId) && MemberID != -1)
                 {
                     BorrowedBookForm borrowedBook = new BorrowedBookForm();
-                    borrowedBook.fillDetailedData(bookId, Convert.ToString(parent.User_Id));
+                    borrowedBook.fillDetailedData(bookId, Convert.ToString(MemberID));
                     borrowedBook.ShowDialog();
                 }
             }
